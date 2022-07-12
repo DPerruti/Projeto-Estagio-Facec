@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--include pega o valor dentro da tag-->
+
+<head th:include="index :: head">
+	<meta charset="utf-8">
+</head>
+
+<body class="app">
+	<!--replace troca a tag inteira, usa-lo quando tem informações na tag ex. class-->
+	<header th:replace="index :: header"></header>
+	<div class="app-wrapper">
+
+		<div class="app-content pt-3 p-md-3 p-lg-4">
+			<div class="container-xl">
+				<h1 class="text-center">Renovações</h1>
+				
+				<a  target="_blank" href="/renovacao/relatorio"><button class="btn btn-primary">Imprimir Relatório</button></a>				
+
+				<div class="tab-content" id="orders-table-tab-content">
+					<div class="tab-pane fade show active" id="orders-all" role="tabpanel"
+						aria-labelledby="orders-all-tab">
+						<div class="app-card app-card-orders-table shadow-sm mb-5">
+							<div class="app-card-body">
+								<div class="table-responsive">
+									<table class="table app-table-hover mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">ID</th>
+												<th class="cell">Cliente</th>
+												<th class="cell">CPF</th>
+												<th class="cell">Número de Registro</th>
+												<th class="cell">Telefone</th>
+												<th class="cell">Valor</th>
+												<th class="cell">Data do Movimento</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="r : ${renovacao}">
+												<td class="cell" th:text="${r.cnh.id}"></td>
+												<td class="cell" th:text="${r.cnh.nome}"></td>
+												<td class="cell" th:text="${r.cnh.cpf}"></td>
+												<td class="cell" th:text="${r.cnh.numRegistro}"></td>
+												<td class="cell" th:text="${r.cnh.telefone}"></td>
+												<td class="cell" th:text="${r.valor}"></td>
+												<td class="cell" th:text="${#temporals.format(r.dataMovimento, 'dd/MM/yyyy')}"></td>
+												<!-- <td class="cell"><a class="btn btn-primary" th:href="@{../../renovacao/editar/(id=${r.id})}">Editar</a></td> -->
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			
+		<footer th:replace="index :: footer"></footer>
+	</div>
+	<div th:include="index :: scripts"></div>
+</body>
+
+</html>

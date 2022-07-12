@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="index :: head">
+	<meta charset="utf-8">
+</head>
+
+<body class="app">
+
+	<header th:replace="index :: header"></header>
+	<div class="app-wrapper">
+
+		<div class="app-content pt-3 p-md-3 p-lg-4">
+			<div class="container-xl">
+				<h1 class="text-center">Lista de UTR</h1>
+					<div class="row g-3 mb-4 align-items-center justify-content-between">
+						<div class="col-auto">
+						
+					</div>
+					
+								<div style="display: flex; justify-content: space-between;">
+									<a href="/detran/formulario"><button class="btn btn-success">Cadastrar Novo</button></a>
+					<div class="col-auto">
+						<div class="page-utilities">
+							<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+								<div class="col-auto">
+									<form class="table-search-form row gx-1 align-items-center" action="consultar" method="post">
+									
+										<div class="col-auto">
+											<input type="text" id="consultar" name="consultar"
+												class="form-control search-orders" placeholder="Informe a UTR">
+										</div>
+										<div class="col-auto">
+											<button type="submit" class="btn app-btn-secondary">Buscar</button>
+										</div>
+									</form>
+
+								</div>
+
+								
+							</div>
+							<!--//row-->
+						</div>
+						<!--//table-utilities-->
+					</div>
+					<!--//col-auto-->
+				</div>
+				<!--//row-->
+				
+
+				<div class="tab-content" id="orders-table-tab-content">
+					<div class="tab-pane fade show active" id="orders-all" role="tabpanel"
+						aria-labelledby="orders-all-tab">
+						<div class="app-card app-card-orders-table shadow-sm mb-5">
+							<div class="app-card-body">
+								<div class="table-responsive">
+									<table class="table app-table-hover mb-0 text-left">
+										<thead>
+											<tr>
+												<th class="cell">ID</th>
+												<th class="text-center">Utr</th>
+												<th class="text-center">Taxa Renovação</th>
+												
+												
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="d : ${detran}">
+												<td class="cell" th:text="${d.id}"></td>
+												<td class="text-center" th:text="${d.nome}"></td>
+												<td class="text-center" th:text="${d.taxaDetran}"></td>
+												<td class="text-center"><a class="btn btn-success" th:href="@{editar/(id=${d.id})}">Editar</a>
+												<td class="text-center"><a class="btn btn-danger" th:href="@{deletar/(id=${d.id})}">Deletar</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer th:replace="index :: footer"></footer>
+	</div>
+	<div th:include="index :: scripts"></div>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+			<div class="container-xl">
+				<h1 style="text-align:center;">Lista de Renovações</h1>
+
+		</div>
+			
+										<table width="100%" border="1px" style="border-color:black">
+										<thead>
+											<tr>
+												<th class="cell">ID</th>
+												<th class="cell">Cliente</th>
+												<th class="cell">CPF</th>
+												<th class="cell">Número de Registro</th>
+												<th class="cell">Telefone</th>
+												<th class="cell">Data da Renovação</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="e : ${renovacao}">
+												<td class="cell" th:text="${e.cnh.id}"></td>
+												<td class="cell" th:text="${e.cnh.nome}"></td>
+												<td class="cell" th:text="${e.cnh.cpf}"></td>
+												<td class="cell" th:text="${e.cnh.numRegistro}"></td>
+												<td class="cell" th:text="${e.cnh.telefone}"></td>
+												
+												<td class="cell" th:text="${#temporals.format(e.dataMovimento, 'dd/MM/yyyy')}"></td>
+											</tr>
+										</tbody>
+									</table>
+							
+
+</body>
+<script type="text/javascript">
+
+var dataAtual = new Date();
+var dia = dataAtual.getDate();
+var mes = (dataAtual.getMonth() + 1);
+var ano = dataAtual.getFullYear();
+var horas = dataAtual.getHours();
+var minutos = dataAtual.getMinutes() ;
+var decimo = (minutos < 10)? "0" + minutos : minutos
+
+
+var element = document.getElementById('hora');
+element.innerHTML ="Data da impressão: " + dia + "/" + mes + "/" + ano + " as " + horas + ":" + decimo + "h." ;
+
+	window.print();
+</script>
+</html>

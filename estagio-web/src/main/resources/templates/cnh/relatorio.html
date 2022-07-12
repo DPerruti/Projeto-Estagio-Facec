@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+   
+	
+			<div class="container-xl">
+				<h1 style="text-align:center;">Lista de CNH</h1>
+
+		</div>
+		
+										<table width="100%" border="1px" style="border-color:black">
+									
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Nome</th>
+												<th>CPF</th>
+												<th>Numero de Registro</th>
+												<th>Telefone</th>
+												<th>Data de Vencimento</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+										
+										<tr th:each="h : ${cnh}">
+												<td th:text="${h.id}"></td>
+												<td th:text="${h.nome}"></td>
+												<td th:text="${h.cpf}"></td>
+												<td th:text="${h.numRegistro}"></td>
+												<td th:text="${h.telefone}"></td>
+												<td th:text="${#temporals.format(h.dataVencimento, 'dd/MM/yyyy')}"></td>
+												
+												
+											</tr>
+										</tbody>
+									</table>
+			
+			
+	
+</body>
+
+
+
+<script type="text/javascript">
+	window.print();
+</script>
+</html>

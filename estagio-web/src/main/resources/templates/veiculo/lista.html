@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--include pega o valor dentro da tag-->
+
+<head th:include="index :: head">
+	<meta charset="utf-8">
+</head>
+
+<body class="app">
+
+	<header th:replace="index :: header"></header>
+	<div class="app-wrapper">
+
+		<div class="text-center">
+			<div class="container-xl">
+				<h1 class="text-center">Lista de Veiculos</h1>
+					
+					<div class="row g-3 mb-4 align-items-center justify-content-between">
+						<div class="col-auto">
+						
+					</div>
+					<div style="display: flex; justify-content: space-between;">
+									<a href="/veiculo/formulario"><button class="btn btn-success">Cadastrar Novo</button></a>
+							<div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+								<div class="col-auto">
+								
+									<form class="table-search-form row gx-1 align-items-center" action="consultar" method="post">
+									
+										<div class="col-auto">
+											<input type="text" id="consultar" name="consultar"
+												class="form-control search-orders" placeholder="Informe o chassi">
+										</div>
+										<div class="col-auto">
+											<button type="submit" class="btn app-btn-secondary">Buscar</button>
+										</div>
+									</form>
+									
+									<form class="table-search-form row gx-1 align-items-center" action="consultarModelo" method="post">
+									
+										<div class="col-auto">
+											<input type="text" id="consultarModelo" name="consultarModelo"
+												class="form-control search-orders" placeholder="Informe o modelo">
+										</div>
+										<div class="col-auto">
+											<button type="submit" class="btn app-btn-secondary">Filtrar</button>
+										</div>
+									</form>
+
+								</div>
+
+								
+							</div>
+					
+</div>
+
+				<div class="tab-content" id="orders-table-tab-content">
+					<div class="tab-pane fade show active" id="orders-all" role="tabpanel"
+						aria-labelledby="orders-all-tab">
+						<div class="app-card app-card-orders-table shadow-sm mb-5">
+							<div class="app-card-body">
+								<div class="table-responsive">
+									<table class="table table-top">
+									
+										<thead>
+											<tr>
+												<th scope="col" class="cell">ID</th>
+												<th class="text-center" scope="col">Placa</th>
+												<th class="text-center" scope="col">Marca</th>
+												<th class="text-center" scope="col">Modelo</th>
+												<th class="text-center" scope="col">Ano</th>
+												<th class="text-center" scope="col">Cor</th>
+												<th class="text-center" scope="col">Chassi</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="v : ${veiculos}">
+												<td class="cell" th:text="${v.id}"></td>
+												<td class="text-center" th:text="${v.placa}"></td>
+												<td class="text-center" th:text="${v.marca}"></td>
+												<td class="text-center" th:text="${v.modelo}"></td>
+												<td class="text-center" th:text="${v.ano}"></td>
+												<td class="text-center" th:text="${v.cor}"></td>
+												<td class="text-center" th:text="${v.chassi}"></td>
+												<td class="text-center"><a class="btn btn-primary" th:href="@{editar/(id=${v.id})}">Editar</a>
+												<td class="text-center"><a class="btn btn-danger" th:href="@{deletar/(id=${v.id})}">Deletar</a>
+												
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									
+									
+									
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer th:replace="index :: footer"></footer>
+	</div>
+	<div th:include="index :: scripts"></div>
+	
+</body>
+
+
+</html>

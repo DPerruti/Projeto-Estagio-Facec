@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--include pega o valor dentro da tag-->
+
+<head th:include="index :: head">
+	<meta charset="utf-8">
+</head>
+
+<body class="app">
+	<!--replace troca a tag inteira, usa-lo quando tem informações na tag ex. class-->
+	<header th:replace="index :: header"></header>
+	<div class="app-wrapper">
+		<div class="app-content pt-3 p-md-3 p-lg-4">
+			<div class="container-xl">
+				<h1 class="app-page-title">Cadastro de Movimentos</h1>
+
+				<hr class="mb-4">
+				<div class="row g-4 settings-section">
+					<div class="col-12 col-md-4">
+
+						<div class="section-intro">Informações dos movimentos.</div>
+					</div>
+					<div class="col-12 col-md-8">
+						<div class="app-card app-card-settings shadow-sm p-4">
+
+							<!-- Alerta -->
+							<div th:if="${not #strings.isEmpty(erros)}"
+								class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration"
+								role="alert">
+								<div class="inner">
+									<div class="app-card-body p-3 p-lg-4">
+										<h3 class="mb-3">Alerta!</h3>
+										<div th:each="erro : ${erros}">
+											<div class="row gx-5 gy-3">
+												<div class="col-12 col-lg-9">
+													<div><span th:text="${erro.getDefaultMessage()}"></span></div>
+												</div>
+											</div>
+										</div>
+										<button type="button" class="btn-close" data-bs-dismiss="alert"
+											aria-label="Close"></button>
+									</div>
+								</div>
+							</div>
+
+							<!--Formulario-->
+							<div class="app-card-body">
+								<form class="settings-form" action="salvar" method="post">
+									<div class="mb-3">
+										<label for="cliente" class="form-label">Cliente</label>
+										<select class="form-select form-select-sm ms-auto d-inline-flex w-auto"
+											id="cliente" name="movimento.cliente.id" th:field="${movimento.cliente.id}">
+											<option value="" text=""></option>
+											<option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nome}">
+											</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="veiculo" class="form-label">Veículo</label>
+										<select class="form-select form-select-sm ms-auto d-inline-flex w-auto"
+											id="veiculo" name="movimento.veiculo.id" th:field="${movimento.veiculo.id}">
+											<option value="" text=""></option>
+											<option th:each="v : ${veiculos}" th:value="${v.id}" th:text="${v.placa+ ' - '+v.modelo}">
+											</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="funcionario" class="form-label">Funcionário</label>
+										<select class="form-select form-select-sm ms-auto d-inline-flex w-auto"
+											id="funcionario" name="movimento.funcionario.id" th:field="${movimento.funcionario.id}">
+											<option value="" text=""></option>
+											<option th:each="f : ${funcionarios}" th:value="${f.id}" th:text="${f.nome}">
+											</option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="tipo" class="form-label">Tipo</label>
+										<select class="form-select form-select-sm ms-auto d-inline-flex w-auto"
+											id="tipo" name="movimento.tipoMovimento"
+											th:field="${movimento.tipoMovimento}">
+											<option th:value="'AQUISICAO_DE_VEICULO'" th:text="'Aquisição de Veículo'"></option>
+											<option th:value="'REGISTRO_DE_OUTRO_UF'" th:text="'Registro de Outro Estado'"></option>
+											<option th:value="'SEGUNDA_VIA_CRV'" th:text="'Segunda Via do CRV'"></option>
+											<option th:value="'PRIMEIRO_EMPLACAMENTO'" th:text="'Primeiro Emplamento'"></option>
+											<option th:value="'ALTERACAO_DADOS'" th:text="'Alteração de Dados'"></option>
+										</select>
+									</div>
+																	
+									<div class="mb-3">
+										<label for="valor" class="form-label">Valor</label>
+										<input type="number" min="0" value="0" step="0.01" class="text-end"
+											id="valor" name="valor" th:value="${movimento.valor}">
+									</div>
+									
+									<div class="mb-3">
+										<label for="dataMovimento" class="col-sm-2 col-form-label">Data de cadastro</label>
+										<input type="date" class="text-end" id="dataMovimento" name="dataMovimento"
+											th:value="${#temporals.format(movimento.dataMovimento, 'yyyy-MM-dd')}" >
+									</div>
+									
+
+									<input type="hidden" id="id" name="id" th:value="${movimento.id}"
+										th:if="${movimento != null}" />
+										<label for="salvar" class="col-sm-2 col-form-label"></label>
+									<button type="submit" class="btn app-btn-primary">Salvar</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer th:replace="index :: footer"></footer>
+	</div>
+	<div th:include="index :: scripts"></div>
+</body>
+
+</html>

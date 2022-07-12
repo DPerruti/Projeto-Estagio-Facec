@@ -1,0 +1,6 @@
+package com.facec.model;
+
+public enum TipoMovimento {
+
+	AQUISICAO_DE_VEICULO, REGISTRO_DE_OUTRO_UF, SEGUNDA_VIA_CRV, ALTERACAO_DADOS, PRIMEIRO_EMPLACAMENTO;
+}

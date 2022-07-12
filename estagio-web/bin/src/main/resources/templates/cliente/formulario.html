@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="header :: head">
+<meta charset="utf-8">
+</head>
+<body>
+	<div class="container">
+		<div th:insert="~{index :: image-top}"></div>
+		
+		<h1>
+			<span th:text="${mensagem}"></span>
+		</h1>
+		
+		<br/>
+		<a href="/" >Voltar</a>
+		<br/>
+		
+		<form action="salvar" method="post">
+		
+			<div class="alert alert-danger"
+				th:if="${not #strings.isEmpty(erros)}" >
+				<div th:each="erro : ${erros}">
+					<span th:text="${erro.getDefaultMessage()}"></span>
+				</div>				
+			</div>
+
+			<label>Nome</label> 
+			<input id="nome" name="nome" th:value="${cliente.nome}"
+				type="text" class="form-control form-control-lg"><br /> 
+				
+			<label>Endereço</label>
+			<input id="endereco" name="endereco" th:value="${cliente.endereco}" type="text"
+				class="form-control form-control-lg"> <br />
+				
+			<label>Data Cadastro</label>
+			<input id="dataCadastro" name="dataCadastro" th:value="${cliente.dataCadastro}" type="date"
+				class="form-control form-control-lg"> <br />
+				
+			<input type="hidden" id="id" name="id" th:value="${cliente.id}" th:if="${cliente != null}"/>
+
+			<button type="submit" class="btn btn-primary">Salvar</button>
+
+		</form>
+
+		<div th:insert="~{footer :: copy}"></div>
+	</div>
+	<script th:insert="header :: scriptBootstrap"></script>
+</body>
+</html>

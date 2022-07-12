@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="header :: head">
+<meta charset="utf-8">
+</head>
+<body>
+	<div class="container">
+		<div class="image-top" th:fragment="image-top">
+			<img src="https://ead.faculdadefacec.edu.br/pluginfile.php/1/theme_adaptable/logo/1597446278/Logo%20FACEC%20Amarelo_mm.png">
+		</div>
+	
+		<h1>
+			<span th:text="${mensagem}"></span>
+		</h1>
+		
+		
+		<div th:insert="~{footer :: copy}"></div>
+	</div>
+
+	<script th:insert="header :: scriptBootstrap"></script>
+</body>
+</html>
